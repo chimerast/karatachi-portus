@@ -1,0 +1,70 @@
+#!/bin/sh
+
+PROGRAM=`basename $0`
+LOCKFILE=/var/lock/$PROGRAM.lock
+
+case "$HOSTNAME" in
+    "add"*)
+        DATABASE=add-portus-db
+        MAILFROM=$PROGRAM@$HOSTNAME.add.artmobile.co.jp
+        ;;
+    "ads"*)
+        DATABASE=ads-portus-db
+        MAILFROM=$PROGRAM@$HOSTNAME.ads.artmobile.co.jp
+        ;;
+    *)
+        DATABASE=portus-db
+        MAILFROM=$PROGRAM@$HOSTNAME.portus.karatachi.org
+        ;;
+esac
+
+PORTUS_BATCH="java -Xmx512M -jar /portus/bin/portus-batch-distribute.jar $DATABASE"
+
+MAILTO=error-portus@artificer.co.jp
+
+export PGPASSWORD=portus
+
+echo "DATABASE=$DATABASE"
+echo "MAILFROM=$MAILFROM"
+
+function errormail {
+    read -rd '' BODY
+    /usr/sbin/sendmail -t << EOF
+To: $MAILTO
+From: $PROGRAM at $HOSTNAME <$MAILFROM>
+Subject: $1
+
+$BODY
+EOF
+}
+
+function removelock {
+    END_TIMESTAMP=`date "+%s"`
+    rm $LOCKFILE
+    
+    PROCESS_TIME=`expr $END_TIMESTAMP - $START_TIMESTAMP`
+
+    if [ $# -ne 0 ]; then
+	if [ $PROCESS_TIME -gt $1 ]; then
+	    errormail "Execution time is expired: $PROGRAM@$HOSTNAME" <<EOF
+Program '$PROGRAM' expires $1 seconds.
+This time is assigned by this script.
+EOF
+	fi
+    fi
+}
+
+if [ `whoami` != "nobody" ]; then
+    echo "Please run by nobody user."
+    exit 1
+fi
+
+if [ -e $LOCKFILE ]; then
+    errormail "Multiple instance execution: $PROGRAM@$HOSTNAME" <<EOF
+Program '$PROGRAM' has already been executed.
+EOF
+    exit 1
+fi
+
+touch $LOCKFILE
+START_TIMESTAMP=`date "+%s"`

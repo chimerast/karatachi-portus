@@ -1,0 +1,37 @@
+#!/bin/sh
+
+PROGRAM=`basename $0`
+LOCKFILE=/var/lock/$PROGRAM.lock
+
+case "$1" in
+    "add")
+        DATABASE=add-portus-db
+        MAILFROM=$PROGRAM@$HOSTNAME.add.artmobile.co.jp
+        ;;
+    "ads")
+        DATABASE=ads-portus-db
+        MAILFROM=$PROGRAM@$HOSTNAME.ads.artmobile.co.jp
+        ;;
+    *)
+        DATABASE=portus-db
+        MAILFROM=$PROGRAM@$HOSTNAME.portus.karatachi.org
+        ;;
+esac
+
+MAILTO=deploy-portus@artificer.co.jp
+
+export PGPASSWORD=portus
+
+echo "DATABASE=$DATABASE"
+echo "MAILFROM=$MAILFROM"
+
+function sendmail {
+    read -rd '' BODY
+    /usr/sbin/sendmail -t << EOF
+To: $MAILTO
+From: $PROGRAM at $HOSTNAME <$MAILFROM>
+Subject: $1
+
+$BODY
+EOF
+}

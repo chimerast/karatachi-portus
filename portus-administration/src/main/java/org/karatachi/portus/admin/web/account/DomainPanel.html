@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:panel>
+  <ul class="toolbar">
+    <li><a wicket:id="reset" href="#" class="user_add">新規作成</a></li>
+  </ul>
+  <form wicket:id="domainForm">
+  <dl>
+    <dt>ID</dt>
+    <dd wicket:id="id" />
+    <dt>名前</dt>
+    <dd><input wicket:id="name" type="text" style="width: 300px" wicket:placeholder="空の場合自動的に割り当てられます" /></dd>
+    <dt>操作可能アカウント</dt>
+    <dd>
+      <table style="width: 100%">
+        <tr>
+          <th>操作可能</th>
+          <th></th>
+          <th>未登録</th>
+        </tr>
+        <tr>
+          <td style="width: 45%; vertical-align: top">
+            <select wicket:id="active" style="width: 100%; height: 100px" />
+          </td>
+          <td style="width: 10%">
+            <input type="submit" wicket:id="join" value="&lt;&lt; 登録" style="width: 100%; text-align: center" />
+            <input type="submit" wicket:id="remove" value="&gt;&gt; 削除" style="width: 100%; text-align: center" />
+          </td>
+          <td style="width: 45%; vertical-align: top">
+            <select wicket:id="inactive" style="width: 100%; height: 100px" />
+          </td>
+        </tr>
+      </table>
+    </dd>
+    <dd><input type="submit" wicket:id="submit" value="ドメイン情報変更" /></dd>
+  </dl>
+  </form>
+  <h3>ドメイン一覧</h3>
+  <table class="list">
+    <thead>
+      <tr>
+        <th style="width: 40px">ID</th>
+        <th>名前</th>
+        <th>登録日</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr wicket:id="domains">
+        <td wicket:id="id" />
+        <td wicket:id="name" />
+        <td wicket:id="registered" wicket:type="date" />
+        <td>
+          <a wicket:id="delete" href="#">削除</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</wicket:panel>
+</body>
+</html>

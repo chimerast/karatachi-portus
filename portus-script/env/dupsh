@@ -1,0 +1,54 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "usage: $0 <command> [args] ..."
+    exit;
+fi
+
+# setup destination
+while read LINE; do
+    if [ $LINE = ${LINE#\#} ]; then
+        NODES=(${NODES[@]} $LINE)
+    fi
+done
+
+CPIDS=()
+
+echo CMD_RSH=${CMD_RSH:=ssh}
+echo USER=${USER:=root}
+echo SYNC=${SYNC:=1}
+echo COLOR=${COLOR:=1}
+echo NODES=${NODES[@]}
+
+# output dir
+mkdir -p /tmp/portus_cmd-$USER
+
+if [ $SYNC -ne 0 ]; then
+# execute in child process (sync)
+    for NODE in ${NODES[@]}; do
+        echo -e "\033[0;32m[$USER@$NODE]$ \033[0;31m$CMD_RSH $USER@$NODE eval \"$@\"\033[0m"
+        $CMD_RSH $USER@$NODE eval "$@"
+    done
+else
+# execute in child process (async)
+    for NODE in ${NODES[@]}; do
+        LOG=/tmp/portus_cmd-$USER/$$@$NODE
+        echo -e "\033[0;32m[$USER@$NODE]$ \033[0;31m$CMD_RSH $USER@$NODE eval \"$@\"\033[0m" > $LOG
+        $CMD_RSH $USER@$NODE eval "$@" >> $LOG 2>&1 &
+        CPIDS=(${CPIDS[@]} $!)
+    done
+
+# wait for all child process
+    for CPID in ${CPIDS[@]}; do
+        wait $CPID
+    done
+
+# output result
+    for NODE in ${NODES[@]}; do
+        LOG=/tmp/portus_cmd/$$@$NODE
+        cat $LOG
+        rm $LOG
+    done
+fi
+
+rm -rf /tmp/portus_cmd-$USER

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>portus-node</artifactId>
+  <packaging>jar</packaging>
+  <parent>
+    <groupId>org.karatachi.portus</groupId>
+    <artifactId>portus</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.0-beta-4</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <doUpdate>true</doUpdate>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>
+                true
+              </addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <Implementation-Build>${buildNumber}</Implementation-Build>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>attached</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <finalName>${buildNumber}</finalName>
+          <outputDirectory>${project.build.directory}/dist</outputDirectory>
+          <appendAssemblyId>false</appendAssemblyId>
+          <descriptors>
+            <descriptor>src/main/assembly/distribute.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <tasks>
+            <checksum file="${project.build.directory}/dist/${buildNumber}.zip" />
+            <copy file="${project.build.directory}/dist/${buildNumber}.zip"
+              todir="/portus/system/stable" overwrite="true" />
+            <copy file="${project.build.directory}/dist/${buildNumber}.zip.MD5"
+              todir="/portus/system/stable" overwrite="true" />
+          </tasks>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <!-- Portus -->
+    <dependency>
+      <groupId>org.karatachi.portus</groupId>
+      <artifactId>portus-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- Karatachi -->
+    <dependency>
+      <groupId>org.karatachi</groupId>
+      <artifactId>karatachi-net</artifactId>
+      <version>${karatachi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.karatachi</groupId>
+      <artifactId>karatachi-native</artifactId>
+      <version>${karatachi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.karatachi</groupId>
+      <artifactId>karatachi-daemon</artifactId>
+      <version>${karatachi.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sbbi</groupId>
+      <artifactId>sbbi-upnplib</artifactId>
+      <version>1.0.4</version>
+    </dependency>
+
+    <!-- Apache Commons -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore-nio</artifactId>
+      <version>4.1</version>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>Version99</id>
+      <name>Version 99 Does Not Exist Maven repository</name>
+      <url>http://no-commons-logging.zapto.org/mvn2</url>
+    </repository>
+  </repositories>
+</project>

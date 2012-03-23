@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components>
+  <include path="aop.dicon" />
+  <include path="dao.dicon" />
+  <include path="dxo.dicon" />
+
+  <component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
+    <property name="instanceDef">
+      @org.seasar.framework.container.deployer.InstanceDefFactory@PROTOTYPE
+    </property>
+    <property name="customizer">null</property>
+    <initMethod name="addReferenceClass">
+      <arg>@org.karatachi.portus.manage.node.NodeTask@class</arg>
+    </initMethod>
+    <initMethod name="addClassPattern">
+      <arg>"org.karatachi.portus.manage.node.task"</arg>
+      <arg>".*Task"</arg>
+    </initMethod>
+  </component>
+
+  <!-- コンストラクタで自己注入 -->
+  <component class="org.seasar.framework.container.autoregister.ComponentAutoRegister">
+    <property name="instanceDef">
+      @org.seasar.framework.container.deployer.InstanceDefFactory@OUTER
+    </property>
+    <property name="customizer">null</property>
+    <initMethod name="addReferenceClass">
+      <arg>@org.karatachi.portus.manage.daemon.S2DaemonManager@class</arg>
+    </initMethod>
+    <initMethod name="addClassPattern">
+      <arg>"org.karatachi.portus.manage.daemon"</arg>
+      <arg>".*Daemon(|Group)"</arg>
+    </initMethod>
+  </component>
+</components>

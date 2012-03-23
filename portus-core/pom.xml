@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>portus-core</artifactId>
+  <packaging>jar</packaging>
+  <parent>
+    <groupId>org.karatachi.portus</groupId>
+    <artifactId>portus</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <dependencies>
+    <!-- Portus -->
+    <dependency>
+      <groupId>org.karatachi.portus</groupId>
+      <artifactId>portus-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- Karatachi -->
+    <dependency>
+      <groupId>org.karatachi</groupId>
+      <artifactId>karatachi-database</artifactId>
+      <version>${karatachi.version}</version>
+    </dependency>
+
+    <!-- Apache Commons -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.5</version>
+    </dependency>
+
+    <!-- Seasar -->
+    <dependency>
+      <groupId>org.seasar.container</groupId>
+      <artifactId>s2-framework</artifactId>
+      <version>${s2container.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seasar.container</groupId>
+      <artifactId>s2-extension</artifactId>
+      <version>${s2container.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seasar.container</groupId>
+      <artifactId>s2-tiger</artifactId>
+      <version>${s2container.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seasar.dao</groupId>
+      <artifactId>s2-dao</artifactId>
+      <version>${s2dao.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seasar.dao</groupId>
+      <artifactId>s2-dao-tiger</artifactId>
+      <version>${s2dao.version}</version>
+    </dependency>
+
+    <!--S2JTA,S2Txを使う場合必要 -->
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-jta_1.1_spec</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <!-- Tomcatの場合必要 -->
+    <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-ejb_3.0_spec</artifactId>
+      <version>1.0</version>
+    </dependency>
+  </dependencies>
+</project>

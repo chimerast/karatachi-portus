@@ -1,0 +1,2 @@
+#!/bin/bash
+dupsh $@ < /home/chimera/bin/add-servers

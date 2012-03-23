@@ -1,0 +1,31 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+
+if [ ! -d "/portus/repository/accesslog/$HOSTNAME" ]; then
+    mkdir /portus/repository/accesslog/$HOSTNAME
+fi
+
+CURRENT_LOG=`date +/portus/log/redirect/accesslog_%F_%H.log`
+PREV_LOG=`date -d "1 hour ago" +/portus/log/redirect/accesslog_%F_%H.log`
+NEXT_LOG=`date -d "1 hour" +/portus/log/redirect/accesslog_%F_%H.log`
+
+FILES=`find /portus/log/redirect -name accesslog_*`
+for SRC in $FILES; do
+    NAME=`basename $SRC`
+    DATE=`echo $NAME | awk -F "[_-]" '{ printf("%s/%s/%s", $2, $3, $4); }'`
+    DEST=/portus/repository/accesslog/$HOSTNAME/$DATE/$NAME.gz
+    DESTDIR=`dirname $DEST`
+
+    if [ ! -d $DESTDIR ]; then
+        mkdir -p $DESTDIR
+    fi
+
+    gzip -c $SRC > $DEST
+
+    if [ $SRC != $CURRENT_LOG -a $SRC != $PREV_LOG -a $SRC != $NEXT_LOG -a -f $DEST ]; then
+        rm $SRC
+    fi
+done
+
+removelock 60

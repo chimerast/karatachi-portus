@@ -1,0 +1,18 @@
+#!/bin/sh
+
+alias sshnode='ssh -i $HOME/.ssh/id_rsa.portus -o StrictHostKeyChecking=no -o CheckHostIP=no'
+alias scpnode='scp -i $HOME/.ssh/id_rsa.portus -o StrictHostKeyChecking=no -o CheckHostIP=no'
+
+while read LINE; do
+    if [ $LINE = ${LINE#\#} ]; then
+        NODES=(${NODES[@]} $LINE)
+    fi
+done
+
+for NODE in ${NODES[@]}; do
+    echo root@$NODE
+    scpnode $HOME/src/nodesetup/portus.sh root@$NODE:/portus
+    scpnode $HOME/src/nodesetup/statuscheck.sh root@$NODE:/portus
+    scpnode $HOME/src/nodesetup/bootstrap/portus-bootstrap.jar root@$NODE:/portus/bootstrap
+    sshnode root@$NODE /portus/portus.sh restart
+done

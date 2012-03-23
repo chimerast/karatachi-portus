@@ -1,0 +1,152 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+
+if [ "$1" != "add" -a "$1" != "ads" -a "$1" != "portus" -o "$2" = "" ]; then
+    echo "usage: deply-portus <service> <module>"
+    echo "  service: add ads portus"
+    echo "  command: build batch redirect admin api manage dist client run-client"
+    exit 1
+fi
+
+if [ "$1" = "portus" -a "$2" = "all" ]; then
+    $0 $1 build batch redirect admin api manage dist restart client run-client
+    exit 0
+fi
+
+DATE=`date +"%F %T"`
+sendmail "Deploy-portus was executed: $@" <<EOF
+Deploy-portus was executed: $@
+  $DATE
+EOF
+
+SERVICE=$1
+shift
+
+case "$HOSTNAME" in
+    "world"*)
+        if [ "$SERVICE" = "portus" ]; then
+            echo "invalid service"
+            exit 1
+        fi
+        ;;
+esac
+
+if [ "$SERVICE" = "portus" ]; then
+    MAVEN_OPTS="-P release"
+else
+    MAVEN_OPTS="-P $SERVICE"
+fi
+
+if [ "$UPDATE" = "yes" ]; then
+    MAVEN_OPTS="$MAVEN_OPTS -U"
+fi
+
+MAVEN_OPTS="$MAVEN_OPTS -Dmaven.tomcat.server=tomcat -Dmaven.tomcat.path=/"
+
+echo SERVICE=$SERVICE
+echo MAVEN_OPTS=$MAVEN_OPTS
+
+while [ "$1" != "" ]; do
+    case "$1" in
+        "update"*)
+            cd ~/src/portus
+            svn up
+            ;;
+        "build"*)
+            rm /portus/system/bootstrap/*
+            rm /portus/system/stable/*
+            cd ~/src/portus
+            svn up
+            mvn $MAVEN_OPTS clean install
+            ;;
+        "batch"*)
+            cd ~/src/portus/portus-batch
+            case "$SERVICE" in
+                "portus")
+                    sudo -u nobody cp target/dist/portus-batch-distribute.jar /portus/bin
+                    ;;
+                *)
+                    sudo -u nobody cp target/dist/portus-batch-distribute.jar /portus/$SERVICE/bin
+                    ;;
+            esac
+            ;;
+        "client"*)
+            cd ~/src/portus/portus-client
+            mvn $MAVEN_OPTS clean install
+            mkdir -p ~/bin/$SERVICE/
+            cp target/dist/portus-client-distribute.jar ~/bin/$SERVICE/
+            ;;
+        "run-client"*)
+            java -jar ~/bin/$SERVICE/portus-client-distribute.jar 10
+            ;;
+        "redirect"*)
+            cd ~/src/portus/portus-redirection
+            case "$SERVICE" in
+                "portus")
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://portus.karatachi.org/manager tomcat:redeploy
+                    ;;
+                "add")
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://$SERVICE-magician-03/manager tomcat:redeploy
+                    ;;
+                *)
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://$SERVICE-magician-01/manager tomcat:redeploy
+                    ;;
+            esac
+            ;;
+        "admin"*)
+            cd ~/src/portus/portus-administration
+            case "$SERVICE" in
+                "portus")
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://admin.portus.karatachi.org/manager tomcat:redeploy
+                    ;;
+                *)
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://$SERVICE-justice-01/manager tomcat:redeploy
+                    ;;
+            esac
+            ;;
+        "api"*)
+            cd ~/src/portus/portus-api
+            case "$SERVICE" in
+                "portus")
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://api.portus.karatachi.org/manager tomcat:redeploy
+                    ;;
+                *)
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://$SERVICE-temperance-01/manager tomcat:redeploy
+                    ;;
+            esac
+            ;;
+        "manage"*)
+            cd ~/src/portus/portus-management
+            case "$SERVICE" in
+                "portus")
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://manage.portus.karatachi.org/manager tomcat:redeploy
+                    ;;
+                *)
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://$SERVICE-empress-01/manager tomcat:redeploy
+                    ;;
+            esac
+            ;;
+        "dist"*)
+            cd ~/src/portus/portus-distribution
+            case "$SERVICE" in
+                "portus")
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://dist.portus.karatachi.org/manager tomcat:redeploy
+                    ;;
+                *)
+                    mvn $MAVEN_OPTS -Dmaven.tomcat.url=http://$SERVICE-emperor-01/manager tomcat:redeploy
+                    ;;
+            esac
+            ;;
+        "restart"*)
+            sudo /etc/init.d/tomcat5.5 restart
+            ;;
+        *)
+            echo "Unsupported command: $1"
+            exit 1
+            ;;
+    esac
+    shift
+done

@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+div.navi {
+  padding: 2px 3px;
+  background-color: #FCFCFC;
+  border-top: solid 1px #D0D0D0;
+  border-right: solid 1px #F0F0F0;
+  border-left: solid 1px #F0F0F0;
+}
+
+table.list {
+  width: 100%;
+}
+
+table.list tr.break {
+  border-top: double 3px #D0D0D0;
+}
+
+table.list td,table.list th {
+  padding: 2px 3px;
+  border-top: solid 1px #D0D0D0;
+  border-right: solid 1px #F0F0F0;
+  border-bottom: solid 1px #D0D0D0;
+  border-left: solid 1px #F0F0F0;
+  cursor: pointer;
+}
+
+table.list thead {
+  border-bottom: double 3px #D0D0D0;
+}
+
+table.list th {
+  text-align: center;
+  font-weight: bold;
+  background-color: #F0F0F0;
+}
+
+table.list th.wicket_orderUp {
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-image: url('resources/bullet_arrow_down.png');
+}
+
+table.list th.wicket_orderDown {
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-image: url('resources/bullet_arrow_up.png');
+}
+
+table.list tbody tr.even {
+  
+}
+
+table.list tbody tr.odd {
+  background-color: #FAFAFA;
+}
+
+table.list tbody tr.even:hover,table.list tbody tr.odd:hover {
+  background-color: #D0DAFF;
+}
+
+table.list tbody tr.canceled {
+  background-color: #FFF0F0;
+}
+
+table.list .symbol {
+  text-align: center;
+  width: 16px
+}
+
+table.small {
+  font-size: 77%;
+}

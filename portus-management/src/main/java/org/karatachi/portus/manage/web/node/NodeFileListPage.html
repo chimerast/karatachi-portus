@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:extend>
+  <p wicket:id="pageTableNav" />
+  <table class="list">
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>FileSize</th>
+        <th>RepFrom</th>
+        <th>Digest</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr wicket:id="chassisFileList">
+        <td><a wicket:id="directLink"><span wicket:id="fullPath" /></a></td>
+        <td wicket:id="size" />
+        <td wicket:id="fromChassisId" />
+        <td wicket:id="digest" />
+      </tr>
+    </tbody>
+  </table>
+</wicket:extend>
+</body>
+</html>

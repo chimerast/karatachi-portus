@@ -1,0 +1,26 @@
+ul.feedbackPanel {
+  border: solid 1px #FFEEEE;
+  background: #FFEFEF;
+  padding: 2px;
+  margin: 4px;
+}
+
+li.feedbackPanelINFO {
+  color: #333399;
+  list-style-type: disc;
+  list-style-position: inside;
+  margin: 1px 4px;
+}
+
+li.feedbackPanelERROR {
+  color: #993333;
+  list-style-type: disc;
+  list-style-position: inside;
+  margin: 1px 4px;
+}
+
+.component_feedback {
+  color: #993333;
+  display:inline;
+  padding-left: 10px;
+}

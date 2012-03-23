@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d [%t] %-5p %c{10} - %m%n%ex</pattern>
+    </encoder>
+  </appender>
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>/portus/log/batch/portus-batch.log</file>
+    <encoder>
+      <pattern>%d [%t] %-5p %c - %m%n%ex</pattern>
+    </encoder>
+  </appender>
+  <logger name="org.karatachi.portus" level="debug" />
+  <logger name="org.seasar.extension.jdbc" level="debug" />
+  <root level="warn">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>

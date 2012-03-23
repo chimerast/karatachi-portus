@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:extend>
+  <form wicket:id="form">
+  <dl>
+    <dt>ファイルID</dt>
+    <dd><input wicket:id="fileId" type="text" /></dd>
+    <dt>追加数</dt>
+    <dd><input wicket:id="count" type="text" /></dd>
+    <dd>
+      <input wicket:id="add" type="submit" value="追加" />
+      <input wicket:id="clear" type="submit" value="消去" />
+    </dd>
+  </dl>
+  </form>
+  <span wicket:id="queue" />
+</wicket:extend>
+</body>
+</html>

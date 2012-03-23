@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:extend>
+  <div>
+    <div>
+      <a wicket:id="prev">&lt; 前の月</a>
+      <a wicket:id="next">次の月 &gt;</a>
+    </div>
+    <h2 wicket:id="period" />
+    <table class="list">
+      <tr>
+        <th style="text-align: left">ドメイン名</th>
+        <th style="width: 10em">総ファイルサイズ</th>
+        <th style="width: 8em">総ファイル数</th>
+        <th style="width: 8em">総アクセス数</th>
+        <th style="width: 10em">総転送量</th>
+      </tr>
+    </table>
+  </div>
+  <div wicket:id="customers">
+    <h2 wicket:id="name" />
+    <table class="list">
+      <tr wicket:id="domains">
+        <th wicket:id="name" style="text-align: left" />
+        <td style="text-align: right; width: 10em"><wicket:container wicket:id="totalSize" /> Bytes</td>
+        <td wicket:id="totalCount" style="text-align: right; width: 8em" />
+        <td wicket:id="totalAccess" style="text-align: right; width: 8em" />
+        <td style="text-align: right; width: 10em"><wicket:container wicket:id="totalTransfer" /> Bytes</td>
+      </tr>
+    </table>
+    <div wicket:id="children" style="margin-left: 20px">
+    <h3 wicket:id="name" />
+    <table class="list">
+      <tr wicket:id="domains">
+        <th wicket:id="name" style="text-align: left" />
+        <td style="text-align: right; width: 10em"><wicket:container wicket:id="totalSize" /> Bytes</td>
+        <td wicket:id="totalCount" style="text-align: right; width: 8em" />
+        <td wicket:id="totalAccess" style="text-align: right; width: 8em" />
+        <td style="text-align: right; width: 10em"><wicket:container wicket:id="totalTransfer" /> Bytes</td>
+      </tr>
+    </table>
+    </div>
+    <hr />
+  </div>
+</wicket:extend>
+</body>
+</html>

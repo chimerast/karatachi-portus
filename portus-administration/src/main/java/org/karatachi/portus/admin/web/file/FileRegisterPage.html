@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:extend>
+  <form wicket:id="form">
+  <table style="width: 100%">
+    <tr>
+      <td style="width: 45%; vertical-align: top">
+        <h2>仮想ディレクトリ</h2>
+        <div><select wicket:id="portusDir" style="width: 100%" /></div>
+        <ul class="toolbar">
+          <li><a wicket:id="upDir" href="#" class="folder_up">一つ上へ</a></li>
+          <li><a wicket:id="createDir" href="#" class="folder_add">フォルダ作成</a></li>
+          <li><a wicket:id="removeFile" href="#" class="file_delete">削除</a></li>
+        </ul>
+        <select wicket:id="portusFileList" style="width: 100%; height: 350px" />
+      </td>
+      <td style="width: 10%">
+        <input wicket:id="reloadView" type="submit" value="表示更新" style="width: 100%; text-align: center" /><br />
+        <input wicket:id="registerFile" type="submit" value="&lt;&lt; 左へ登録" style="width: 100%; text-align: center" />
+      </td>
+      <td style="width: 45%; vertical-align: top">
+        <h2>FTP ディレクトリ</h2>
+        <div><select  wicket:id="localDir" style="width: 100%" /></div>
+        <ul class="toolbar">
+          <li><a wicket:id="upLocalDir" href="#" class="folder_up">一つ上へ</a></li>
+        </ul>
+        <select wicket:id="localFileList" style="width: 100%; height: 350px" />
+      </td>
+    </tr>
+  </table>
+  </form>
+  <ul class="info">
+    <li>登録するファイル名に使用できる文字は「英数字」+「-」+「_」+「.」です。それ以外は登録に失敗します。</li>
+  </ul>
+</wicket:extend>
+</body>
+</html>

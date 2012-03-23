@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.karatachi.portus</groupId>
+  <artifactId>portus</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>portus-common</module>
+    <module>portus-auth</module>
+
+    <module>portus-bootstrap</module>
+    <module>portus-node</module>
+
+    <module>portus-redirection</module>
+    <module>portus-distribution</module>
+
+    <module>portus-core</module>
+    <module>portus-batch</module>
+    <module>portus-webbase</module>
+    <module>portus-administration</module>
+    <module>portus-management</module>
+
+    <module>portus-api</module>
+    <module>portus-client</module>
+  </modules>
+
+  <profiles>
+    <profile>
+      <id>devel</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <context>default</context>
+        <env>devel</env>
+      </properties>
+    </profile>
+    <profile>
+      <id>release</id>
+      <properties>
+        <context>default</context>
+        <env>release</env>
+      </properties>
+    </profile>
+    <profile>
+      <id>add</id>
+      <properties>
+        <context>add</context>
+        <env>release</env>
+      </properties>
+    </profile>
+    <profile>
+      <id>ads</id>
+      <properties>
+        <context>ads</context>
+        <env>release</env>
+      </properties>
+    </profile>
+  </profiles>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources-${env}</directory>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/assembly/${context}</directory>
+        <includes>
+          <include>${project.artifactId}.properties</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1.1</version>
+        <configuration>
+          <containerConfigXML>src/main/config/${context}/context.xml</containerConfigXML>
+          <webXml>src/main/webapp/WEB-INF/web-release.xml</webXml>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.6</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <karatachi.version>0.3-SNAPSHOT</karatachi.version>
+    <s2wicket.version>1.4.15</s2wicket.version>
+    <s2container.version>2.4.43</s2container.version>
+    <s2dao.version>1.0.51</s2dao.version>
+    <slf4j.version>1.6.1</slf4j.version>
+    <logback.version>0.9.27</logback.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.karatachi</groupId>
+      <artifactId>karatachi-lang</artifactId>
+      <version>${karatachi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>99.0-does-not-exist</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <name>Karatachi Portus</name>
+  <description />
+  <scm>
+    <developerConnection>scm:svn:https://repo.karatachi.org/svn</developerConnection>
+    <url>http://repo.karatachi.org/</url>
+  </scm>
+  <repositories>
+    <repository>
+      <id>repo.karatachi.org</id>
+      <name>Karatachi Maven2 Repository</name>
+      <url>http://repo.karatachi.org/mvn</url>
+    </repository>
+    <repository>
+      <id>maven.seasar.org</id>
+      <name>The Seasar Foundation Maven2 Repository</name>
+      <url>http://maven.seasar.org/maven2</url>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>karatachi-repository</id>
+      <name>Karatachi Maven2 Repository</name>
+      <url>dav:https://repo.karatachi.org/mvn</url>
+    </repository>
+  </distributionManagement>
+</project>

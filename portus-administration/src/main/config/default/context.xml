@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <Resource name="jdbc/master" auth="Container" type="javax.sql.DataSource"
+    username="portus" password="portus" driverClassName="org.postgresql.Driver"
+    url="jdbc:postgresql://portus-db/portus?loginTimeout=5" maxActive="40"
+    maxIdle="20" maxWait="10000" validationQuery="SELECT version()" />
+  <Manager pathname="" />
+</Context>

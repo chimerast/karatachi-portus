@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:extend>
+  <form wicket:id="form">
+  <div>
+    <input type="text" wicket:id="date" />
+    <input type="submit" wicket:id="getlog" value="ドメインのログ取得" />
+  </div>
+  <div>
+    <select wicket:id="portusDir" style="width: 100%" />
+  </div>
+  <ul class="toolbar">
+    <li><a wicket:id="upDir" href="#" class="folder_up">一つ上へ</a></li>
+  </ul>
+  <table class="list">
+    <thead>
+      <tr>
+        <th style="width: 18em" rowspan="2">ファイル名</th>
+        <wicket:container wicket:id="hourHeader1">
+        <th wicket:id="value" />
+        </wicket:container>
+      </tr>
+      <tr>
+        <wicket:container wicket:id="hourHeader2">
+        <th wicket:id="value" />
+        </wicket:container>
+      </tr>
+    </thead>
+    <tbody wicket:id="files">
+      <tr>
+        <td rowspan="2">
+          <a wicket:id="nameLink" href="#"><span wicket:id="name"></span></a>
+        </td>
+        <wicket:container wicket:id="hour1">
+        <td wicket:id="value" style="text-align: right" />
+        </wicket:container>
+       </tr>
+       <tr>
+        <wicket:container wicket:id="hour2">
+        <td wicket:id="value" style="text-align: right" />
+        </wicket:container>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+</wicket:extend>
+</body>
+</html>

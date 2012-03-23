@@ -1,0 +1,11 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+
+CURRENT_DUMP=`date +/portus/backup/db/portus_%F_%H.dump`
+
+pg_dump -h $DATABASE -U portus -Fc -f $CURRENT_DUMP portus
+
+find /portus/backup/db -cmin +300 | grep -v _00 | grep -v _12 | xargs rm -f
+
+removelock

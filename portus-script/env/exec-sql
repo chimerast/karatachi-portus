@@ -1,0 +1,26 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+
+if [ "$1" != "add" -a "$1" != "ads" -a "$1" != "portus" ]; then
+    echo "usage: exec-sql <service>"
+    echo "  service: add ads portus"
+    exit 1
+fi
+
+ICONV="iconv -f UTF-8 -t WINDOWS-31J"
+
+rm ~/csv/*
+
+if [ $# -eq 1 ]; then
+    FILES=$(find ~/sql -name .svn -prune -o -type f -print)
+    for SQL in $FILES; do
+        echo $SQL
+        CSV=~/csv/$(basename $SQL .sql).csv
+        psql -h $DATABASE -U portus portus -t -A -F , -f $SQL | $ICONV > $CSV
+    done
+else
+    SQL=$2
+    CSV=~/csv/$(basename $SQL .sql).csv
+    psql -h $DATABASE -U portus portus -t -A -F , -f $SQL | $ICONV > $CSV
+fi

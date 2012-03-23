@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SVN_CONFIG="--username chimera --config-dir /portus/svn"
+
+case "$HOSTNAME" in
+    "world"*)
+        sudo -u nobody svn ci $SVN_CONFIG -m "" /portus/add/bin
+        sudo -u nobody svn up $SVN_CONFIG /portus/add/bin
+        sudo -u nobody svn up $SVN_CONFIG /portus/ads/bin
+        ;;
+    "portus"*)
+        sudo -u nobody svn ci $SVN_CONFIG -m "" /portus/bin
+        sudo -u nobody svn up $SVN_CONFIG /portus/bin
+        ;;
+esac

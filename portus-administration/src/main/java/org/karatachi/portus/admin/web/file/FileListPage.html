@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:extend>
+  <form wicket:id="form">
+  <div>
+    <select wicket:id="portusDir" style="width: 100%" />
+  </div>
+  <ul class="toolbar">
+    <li><a wicket:id="upDir" href="#" class="folder_up">一つ上へ</a></li>
+    <li><a wicket:id="createDir" href="#" class="folder_add">フォルダ作成</a></li>
+    <li><a wicket:id="renameFile" href="#" class="file_rename">名前変更</a></li>
+    <li><a wicket:id="removeFile" href="#" class="file_delete">削除</a></li>
+  </ul>
+  <ul class="toolbar">
+    <li><a wicket:id="publishFile" href="#" class="file_publish">公開</a></li>
+    <li><a wicket:id="unpublishFile" href="#" class="file_unpublish">非公開</a></li>
+    <li><a wicket:id="setFileOpenDate" href="#" class="file_opendate">公開開始設定</a></li>
+    <li><a wicket:id="setFileCloseDate" href="#" class="file_closedate">公開終了設定</a></li>
+    <li><a wicket:id="authorizeFile" href="#" class="file_authorize">認証</a></li>
+    <li><a wicket:id="unauthorizeFile" href="#" class="file_unauthorize">認証解除</a></li>
+    <li><a wicket:id="streamingFile" href="#" class="file_streaming">ストリーミング配信</a></li>
+    <li><a wicket:id="normalFile" href="#" class="file_normal">通常配信</a></li>
+  </ul>
+  <table class="list">
+    <thead>
+      <tr>
+        <th class="symbol"><input type="checkbox" onclick="$('#filesbody input[type=checkbox]').attr('checked', this.checked)" /></th>
+        <th>ファイル名</th>
+        <th style="width: 10em">状態</th>
+        <th style="width: 5em">サイズ</th>
+        <th style="width: 5em">使用領域</th>
+        <th class="symbol">公</th>
+        <th class="symbol">認</th>
+        <th class="symbol">ス</th>
+        <th style="width: 8em">公開開始</th>
+        <th style="width: 8em">公開終了</th>
+      </tr>
+    </thead>
+    <tbody id="filesbody">
+      <tr wicket:id="files">
+        <td class="symbol"><input wicket:id="checked" type="checkbox" /></td>
+        <td>
+          <a wicket:id="nameLink" href="#"><span wicket:id="name"></span></a>
+          <a wicket:id="previewLink" href="#" target="_blank">URL</a>
+          <a wicket:id="authorizedLink" href="#" target="_blank">認証済みURL</a>
+        </td>
+        <td><span wicket:id="status" class="label" /></td>
+        <td wicket:id="size" wicket:type="datasize" style="text-align: right" />
+        <td wicket:id="actualSize" wicket:type="datasize" style="text-align: right" />
+        <td class="symbol"><img wicket:id="published" /></td>
+        <td class="symbol"><img wicket:id="authorized" /></td>
+        <td class="symbol"><img wicket:id="streaming" /></td>
+        <td wicket:id="openDate" />
+        <td wicket:id="closeDate" />
+      </tr>
+    </tbody>
+  </table>
+  </form>
+</wicket:extend>
+</body>
+</html>

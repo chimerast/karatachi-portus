@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function aggregate_day {
+    echo "aggregate: $1-$2-$3"
+    for h in {0..23}
+    do
+        ./aggregate_node_log $1 $2 $3 $h
+    done
+}
+
+aggregate_day 2010 12 28
+exit 0
+
+for d in {1..27}
+do
+    aggregate_day 2010 12 $d
+done

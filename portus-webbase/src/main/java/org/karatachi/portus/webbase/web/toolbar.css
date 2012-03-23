@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+ul.toolbar {
+  margin: 4px 0px;
+}
+
+ul.toolbar li {
+  display: inline;
+}
+
+ul.toolbar li a {
+  padding: 1px;
+  font-weight: bold;
+  padding-left: 17px ! important;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+ul.toolbar li a:hover {
+  background-color: #F0F0F0;
+}
+
+.user_add {
+  background-image: url('resources/user_add.png');
+}
+
+.folder_up {
+  background-image: url('resources/folder_up.png');
+}
+
+.folder_add {
+  background-image: url('resources/folder_add.png');
+}
+
+.file_rename {
+  background-image: url('resources/page_white_go.png');
+}
+
+.file_delete {
+  background-image: url('resources/page_white_delete.png');
+}
+
+.file_publish {
+  background-image: url('resources/world_add.png');
+}
+
+.file_unpublish {
+  background-image: url('resources/world_delete.png');
+}
+
+.file_opendate {
+  background-image: url('resources/time_add.png');
+}
+
+.file_closedate {
+  background-image: url('resources/time_delete.png');
+}
+
+.file_authorize {
+  background-image: url('resources/lock_add.png');
+}
+
+.file_unauthorize {
+  background-image: url('resources/lock_delete.png');
+}
+
+.file_streaming {
+  background-image: url('resources/film_add.png');
+}
+
+.file_normal {
+  background-image: url('resources/film_delete.png');
+}

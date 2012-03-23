@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>portus-webbase</artifactId>
+  <packaging>jar</packaging>
+  <parent>
+    <groupId>org.karatachi.portus</groupId>
+    <artifactId>portus</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <dependencies>
+    <!-- Portus -->
+    <dependency>
+      <groupId>org.karatachi.portus</groupId>
+      <artifactId>portus-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- Karatachi -->
+    <dependency>
+      <groupId>org.karatachi</groupId>
+      <artifactId>karatachi-wicket</artifactId>
+      <version>${karatachi.version}</version>
+    </dependency>
+
+    <!-- Seasar -->
+    <dependency>
+      <groupId>org.seasar.wicket</groupId>
+      <artifactId>s2wicket-libs</artifactId>
+      <version>${s2wicket.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.wicket</groupId>
+      <artifactId>wicket-datetime</artifactId>
+      <version>${s2wicket.version}</version>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+
+java -Xmx512M -jar /portus/bin/portus-batch-distribute.jar $DATABASE CalculateFileDigestLogic $TIMESTAMP
+
+removelock

@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+.label {
+  padding: 1px;
+  padding-left: 17px ! important;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.status_cancel {
+  color: #FF6152;
+  background-image: url('resources/cancel.png');
+}
+
+.status_stop {
+  color: #796152;
+  background-image: url('resources/stop.png');
+}
+
+.status_waiting {
+  color: #799BB7;
+  background-image: url('resources/control_pause.png');
+}
+
+.status_executing {
+  color: #2F5376;
+  background-image: url('resources/control_play_blue.png');
+}
+
+.status_complete {
+  background-image: url('resources/accept.png');
+}
+
+.file {
+  padding: 1px;
+  font-weight: bold;
+  padding-left: 17px ! important;
+  background-image: url('resources/page_white_text.png');
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.folder {
+  padding: 1px;
+  font-weight: bold;
+  padding-left: 17px ! important;
+  background-image: url('resources/folder.png');
+  background-position: left center;
+  background-repeat: no-repeat;
+}

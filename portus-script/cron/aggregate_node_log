@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+
+if [ $# -eq 0 ]; then
+    TIMESTAMP=`date -d "1 day ago" "+%Y %m %d"`
+    for h in {0..23}; do
+	$PORTUS_BATCH AggregateNodeLogLogic $TIMESTAMP $h
+    done
+else
+    $PORTUS_BATCH AggregateNodeLogLogic $@
+fi
+
+removelock

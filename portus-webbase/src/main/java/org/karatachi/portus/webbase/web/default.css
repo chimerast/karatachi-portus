@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+@import url(reset-fonts-grids.css);
+
+@import url(karatachi.css);
+
+@import url(table.css);
+
+@import url(feedback.css);
+
+@import url(toolbar.css);
+
+@import url(label.css);
+
+@import url(tab.css);
+
+body {
+  font-family: "Verdana", "Helvetica", "Arial", "ヒラギノ角ゴ Pro W3",
+    "Hiragino Kaku Gothic Pro", "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
+}
+
+h1 {
+  font-size: 123.1%;
+  margin: 8px 0px;
+  color: #AA6666;
+  font-weight: bold;
+  border-bottom: 1px dotted #CCCCCC;
+  clear: both;
+}
+
+h2 {
+  font-size: 116%;
+  margin: 8px 0px;
+  color: #AA6666;
+  font-weight: bold;
+  border-bottom: 1px dotted #CCCCCC;
+  clear: both;
+}
+
+h3 {
+  margin: 8px 0px;
+  color: #AA6666;
+  font-weight: bold;
+  border-bottom: 1px solid #CCCCCC;
+  clear: both;
+}
+
+p {
+  margin: 8px 0px;
+}
+
+a {
+  color: #0067ba;
+  text-decoration: none;
+}
+
+form dl,form ul,form ol {
+  clear: both;
+  margin: 8px 0px;
+}
+
+form dt {
+  font-weight: bold;
+  padding: 2px 0px 2px 2px;
+  clear: left;
+  float: left;
+  width: 160px;
+  border-left: solid 8px #F0F0F0;
+}
+
+form dd {
+  padding: 2px 0px;
+  margin-left: 180px;
+}
+
+form .placeholder {
+  color: #A0A0A0;
+}
+
+dl.list {
+  margin: 8px 0px;
+}
+
+dl.list dt {
+  font-weight: bold;
+  padding: 2px 0px 2px 2px;
+  clear: left;
+  float: left;
+  width: 160px;
+  border-left: solid 8px #F0F0F0;
+}
+
+dl.list dd {
+  padding: 2px 0px;
+  margin-left: 180px;
+}
+
+ul.info li {
+  margin: 4px 0px;
+}
+
+ul.info li {
+  color: #993300;
+  list-style: disc;
+  list-style-position: inside;
+}
+
+#header {
+  padding: 4px0px;
+  text-align: right;
+}
+
+#menu {
+  padding: 0px 14px 0px 0px;
+  border-right: 6px solid #F0F0F0;
+}
+
+#menu dt {
+  margin: 4px 0px;
+  padding: 2px;
+  color: #006699;
+  font-weight: bold;
+}
+
+#menu dd a,#menu dd em {
+  display: block;
+  text-decoration: none;
+  margin: 4px 0px;
+  padding: 2px 6px;
+  border-bottom: 2px dotted #CCCCCC;
+}
+
+#menu dd a {
+  background-color: #FAFAFA;
+}
+
+#menu dd a:hover {
+  color: #AA6666;
+  border-bottom: 2px solid #AA6666;
+}
+
+#menu dd em {
+  color: #AA6666;
+  background-color: #FFFFFF;
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:panel>
+  <wicket:link>
+    <dl id="menu">
+      <dd><a href="../top/IndexPage.html">管理トップ</a></dd>
+      <dt>ファイル管理</dt>
+      <dd><a href="../file/FileRegisterPage.html">ファイル登録</a></dd>
+      <dd><a href="../file/FileListPage.html">ファイル管理</a></dd>
+      <dd><a href="../file/AccessCountPage.html">アクセス数</a></dd>
+      <dt wicket:id="manage">アカウント管理</dt>
+      <dd wicket:id="account"><a href="../account/AccountPage.html">アカウント管理</a></dd>
+      <dd wicket:id="domain"><a href="../account/DomainPage.html">ドメイン管理</a></dd>
+      <wicket:container wicket:id="customer">
+      <dd><a href="../account/CustomerPage.html">契約者管理</a></dd>
+      </wicket:container>
+      <wicket:container wicket:id="system">
+      <dt>システム管理</dt>
+      <dd><a href="../account/CustomerTransferPage.html">転送量一覧</a></dd>
+      <dd><a href="../account/NewCustomerPage.html">新規契約者追加</a></dd>
+      <dd><a href="../manage/MemoryViewPage.html">メモリ監視</a></dd>
+      </wicket:container>
+    </dl>
+  </wicket:link>
+</wicket:panel>
+</body>
+</html>

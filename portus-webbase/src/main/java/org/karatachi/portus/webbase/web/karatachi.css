@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.karatachi table.monitor {
+  width: 100%;
+  font-size: 85%;
+}
+
+.karatachi table.monitor tr.break {
+  border-top: double 3px #D0D0D0;
+}
+
+.karatachi table.monitor td,.karatachi table.monitor th {
+  padding: 2px 3px;
+  border-top: solid 1px #D0D0D0;
+  border-right: solid 1px #F0F0F0;
+  border-bottom: solid 1px #D0D0D0;
+  border-left: solid 1px #F0F0F0;
+  cursor: pointer;
+}
+
+.karatachi table.monitor thead {
+  border-bottom: double 3px #D0D0D0;
+}
+
+.karatachi table.monitor th {
+  text-align: center;
+  font-weight: bold;
+  background-color: #F0F0F0;
+}
+
+.karatachi table.monitor tbody tr.even {
+  
+}
+
+.karatachi table.monitor tbody tr.odd {
+  background-color: #FAFAFA;
+}
+
+.karatachi table.monitor tbody tr.even:hover,.karatachi table.monitor tbody tr.odd:hover
+  {
+  background-color: #D0DAFF;
+}
+
+.karatachi pre {
+  font-family: 'Consolas', 'メイリオ', monospace;
+  font-size: 85%;
+}

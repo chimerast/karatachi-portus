@@ -1,0 +1,21 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+
+if [ $# -eq 0 ]; then
+    TIMESTAMP=`date -d "1 hour ago" "+%Y %m %d %H"`
+    $PORTUS_BATCH AggregateAccessLogLogic $TIMESTAMP
+elif [ "$1" = "now" ]; then
+    TIMESTAMP=`date "+%Y %m %d %H"`
+    $PORTUS_BATCH AggregateAccessLogLogic $TIMESTAMP
+
+    MINUTE=`date "+%M"`
+    if [ $MINUTE -lt 10 ]; then
+	TIMESTAMP=`date -d "1 hour ago" "+%Y %m %d %H"`
+	$PORTUS_BATCH AggregateAccessLogLogic $TIMESTAMP
+    fi
+else
+    $PORTUS_BATCH AggregateAccessLogLogic $@
+fi
+
+removelock 300

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:panel>
+  <p><span wicket:id="pageTableNav" /></p>
+  <table class="list">
+    <thead>
+      <tr>
+        <th></th>
+        <th>ファイルID</th>
+        <th>順番</th>
+        <th>Url</th>
+        <th>サイズ</th>
+        <th>優先度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr wicket:id="replicationJobs">
+        <td wicket:id="number" />
+        <td wicket:id="fileId" />
+        <td wicket:id="order" />
+        <td wicket:id="url" />
+        <td wicket:id="size" />
+        <td wicket:id="priority" />
+      </tr>
+    </tbody>
+  </table>
+</wicket:panel>
+</body>
+</html>

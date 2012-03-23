@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -jar ~/src/portus/portus-api-client/target/dist/portus-api-client-distribute.jar $@

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+. `dirname $0`/portus_config
+shift
+
+NODES=`psql -h $DATABASE -U portus portus -A -t -c "SELECT ip_address FROM node WHERE status=1;"`
+
+CMD_RSH="ssh -i $HOME/.ssh/id_rsa.portus -o StrictHostKeyChecking=no -o CheckHostIP=no" USER=root dupsh $@ << EOF
+$NODES
+EOF

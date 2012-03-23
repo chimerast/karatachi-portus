@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<wicket:extend>
+  <wicket:enclosure>
+    <dl class="list">
+      <dt>お知らせ</dt>
+      <dd wicket:id="notify" />
+    </dl>
+  </wicket:enclosure>
+  <dl class="list">
+    <dt>契約者名</dt>
+    <dd><wicket:container wicket:id="name" /> 様</dd>
+    <dt>認証コード</dt>
+    <dd wicket:id="code" />
+  </dl>
+  <wicket:container wicket:id="domains">
+    <h3 wicket:id="name" />
+    <dl class="list">
+      <dt>使用領域</dt>
+      <dd><span wicket:id="totalSize" /> Bytes</dd>
+      <dt>ファイル数</dt>
+      <dd wicket:id="totalCount" />
+      <dt>総アクセス数</dt>
+      <dd><wicket:container wicket:id="totalAccess" /> <wicket:container wicket:id="range1" /></dd>
+      <dt>ファイル転送量</dt>
+      <dd><wicket:container wicket:id="totalTransfer" /> Bytes <wicket:container wicket:id="range2" /></dd>
+    </dl>
+  </wicket:container>
+</wicket:extend>
+</body>
+</html>
